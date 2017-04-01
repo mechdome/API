@@ -26,28 +26,28 @@ import com.mechdome.view.HostOSView;
 /**
  * An AdMob Native Ad View
  *
- * Created by Mario Kosmiskas on 3/29/17.
+ * Created by Mario Kosmiskas on 4/1/17.
  */
 @SuppressWarnings("unused")
-public class AdMobNativeView extends HostOSView {
+public class AdMobBannerView extends HostOSView {
 
-    public AdMobNativeView(Context context) {
+    public AdMobBannerView(Context context) {
         this(context, null);
     }
 
-    public AdMobNativeView(Context context, AttributeSet attrs) {
+    public AdMobBannerView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public AdMobNativeView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public AdMobBannerView(Context context, AttributeSet attrs, int defStyleAttr) {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public AdMobNativeView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public AdMobBannerView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
 
         if (attrs != null) {
-            TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.AdMobNativeView, 0, 0);
+            TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.AdMobBannerView, 0, 0);
 
             try {
                 boolean isTest = a.getBoolean(R.styleable.MDAdBob_testMode, true);
@@ -61,7 +61,7 @@ public class AdMobNativeView extends HostOSView {
     }
 
     public void init(String appId, String adUnitId, boolean isInTestMode) {
-        this.setHostViewClassName("MDNativeAdMobView");
+        this.setHostViewClassName("MDBannerAdMobView");
         this.setProperty("isInTestMode", isInTestMode?"true":"false");
         this.setProperty("applicationID", appId);
         this.setProperty("adUnitID", adUnitId);
@@ -69,7 +69,6 @@ public class AdMobNativeView extends HostOSView {
     }
 
     protected String getMessage() {
-        return "AdMob Native Ad";
+        return "AdMob Banner Ad";
     }
-
 }
