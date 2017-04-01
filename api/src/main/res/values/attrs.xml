@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="AdMobNativeView">
+    <declare-styleable name="MDAdBob">
         <attr name="testMode" format="boolean" />
         <attr name="appID" format="string" />
         <attr name="adUnitID" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="AdMobNativeView" parent="MDAdBob">
+    </declare-styleable>
+
+    <declare-styleable name="AdMobBannerView" parent="MDAdBob">
     </declare-styleable>
 </resources>
