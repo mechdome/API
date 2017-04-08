@@ -122,6 +122,7 @@ public class HostOSView extends View {
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
+        getParent().requestTransparentRegion(this);
         try {
             attached();
         } catch (UnsatisfiedLinkError ule) {}
