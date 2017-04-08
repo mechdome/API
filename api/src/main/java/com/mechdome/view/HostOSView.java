@@ -136,6 +136,13 @@ public class HostOSView extends View {
     }
 
     @Override
+    public void onWindowVisibilityChanged(final int visibility) {
+        try {
+            setVisible(visibility == View.VISIBLE);
+        } catch (UnsatisfiedLinkError ule) {}
+    }
+
+    @Override
     public void onVisibilityChanged(final View changedView, final int visibility) {
         try {
             setVisible(visibility == View.VISIBLE);
@@ -144,8 +151,12 @@ public class HostOSView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        touchEvent(ev);
-        return true;
+        try {
+            touchEvent(ev);
+            return true;
+        } catch (UnsatisfiedLinkError ule) {}
+
+        return false;
     }
 
 }
