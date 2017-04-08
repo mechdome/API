@@ -17,10 +17,10 @@
 package com.mechdome.view.google;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
-import com.mechdome.api.R;
 import com.mechdome.view.HostOSView;
 
 /**
@@ -30,6 +30,8 @@ import com.mechdome.view.HostOSView;
  */
 @SuppressWarnings("unused")
 public class AdMobBannerView extends HostOSView {
+
+    private int mNativeHeight;
 
     public AdMobBannerView(Context context) {
         this(context, null);
@@ -46,18 +48,24 @@ public class AdMobBannerView extends HostOSView {
     public AdMobBannerView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
 
-        if (attrs != null) {
-            TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.AdMobBannerView, 0, 0);
+        DisplayMetrics metrics = new DisplayMetrics();
+        WindowManager windowManager = (WindowManager)getContext().getSystemService(Context.WINDOW_SERVICE);
+        windowManager.getDefaultDisplay().getMetrics(metrics);
+        int density = metrics.densityDpi;
 
-            try {
-                boolean isTest = a.getBoolean(R.styleable.MDAdBob_testMode, true);
-                String appId = a.getString(R.styleable.MDAdBob_appID);
-                String adUnitId = a.getString(R.styleable.MDAdBob_adUnitID);
-                init(appId, adUnitId, isTest);
-            } finally {
-                a.recycle();
-            }
-        }
+        // Temporary value to allow for visual layout in Android Studio
+        mNativeHeight = density==DisplayMetrics.DENSITY_HIGH?200:100;
+    }
+
+    private void setNativeHeight(int h) {
+        mNativeHeight = h;
+        requestLayout();
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int w = getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec);
+        setMeasuredDimension(w, mNativeHeight);
     }
 
     public void init(String appId, String adUnitId, boolean isInTestMode) {

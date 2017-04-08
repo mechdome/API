@@ -45,19 +45,6 @@ public class AdMobNativeView extends HostOSView {
 
     public AdMobNativeView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-
-        if (attrs != null) {
-            TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.AdMobNativeView, 0, 0);
-
-            try {
-                boolean isTest = a.getBoolean(R.styleable.MDAdBob_testMode, true);
-                String appId = a.getString(R.styleable.MDAdBob_appID);
-                String adUnitId = a.getString(R.styleable.MDAdBob_adUnitID);
-                init(appId, adUnitId, isTest);
-            } finally {
-                a.recycle();
-            }
-        }
     }
 
     public void init(String appId, String adUnitId, boolean isInTestMode) {
